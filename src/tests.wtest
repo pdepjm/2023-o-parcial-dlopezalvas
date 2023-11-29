@@ -1,6 +1,68 @@
+import example.*
 
-test "testX" {
+const corteAPunto = new CorteDeCarne(peso=100, estaAPunto=true)
+const parrilladaDeCortes = new Parrillada(componentes=[corteAPunto, corteAPunto, corteAPunto])
+const hamburguesaConGluten = new HamburguesaDeCarne(pesoMedallon = 100, pan=panIndustrial)
+	
+describe "Parrillada"{
+	
+	const corteGrande = new CorteDeCarne(peso=500, estaAPunto=true)
+	const corteChiquito = new CorteDeCarne(peso=10, estaAPunto=true)
+	const parrilladaConGluten = new Parrillada(componentes=[hamburguesaConGluten, corteAPunto, corteAPunto])
+	const parrilladaChiquita = new Parrillada(componentes=[corteGrande])
+	const parrilladaPocoPeso = new Parrillada(componentes=[corteChiquito, corteChiquito, corteChiquito])
+	
+	test "El peso de la parrillada es la suma del peso de su componentes" {
+		assert.equals(parrilladaDeCortes.peso(), 300)
+	}
+	
+	test "La valoracion de la parrillada es la suma de las valoraciones de su componentes" {
+		assert.equals(parrilladaDeCortes.valoracion(), 300)
+	}
+	
+	test "Una parrillada es apta celiaca si sus componentes lo son" {
+		assert.that(parrilladaDeCortes.aptoCeliacos())
+	}
+	
+	test "Una parrillada no es apta celiaca si uno de sus componentes no lo es" {
+		assert.notThat(parrilladaConGluten.aptoCeliacos())
+	}
+	
+	test "Una parrillada no es especial si tiene pocos componentes" {
+		assert.notThat(parrilladaChiquita.esEspecial())
+	}
+	
+	test "Una parrillada no es especial si tiene poco peso" {
+		assert.notThat(parrilladaPocoPeso.esEspecial())
+	}
+	
+	test "Una parrillada es especial si tiene varios componentes y mucho peso" {
+		assert.that(parrilladaDeCortes.esEspecial())
+	}
+	
+	
+}
 
-	assert.that(true)
-
+describe "Comensal"{
+	
+	const comensalCeliaco = new Comensal(dinero=10000, preferencia=celiaco)
+	const comensalTodoTerreno = new Comensal(dinero=10000, preferencia=todoTerreno)
+	
+	method initialize(){
+		parrillaMiguelito.agregarPlatoAlMenu(hamburguesaConGluten)
+	}
+	
+	test "Un comensal se puede dar un gusto" {
+		comensalTodoTerreno.darseUnGusto()
+		assert.equals(comensalTodoTerreno.dinero(), 5200)
+	}
+	
+	test "Un comensal no se puede dar un gusto" {
+		assert.throwsExceptionWithMessage("No hay platos que puedan ser comprados", {comensalCeliaco.darseUnGusto()})
+	}
+	
+	test "Un comensal todo terreno no puede comer con gluten si le dieron problemas gastricos" {
+		comensalTodoTerreno.tenerProblemasGastricos()
+		assert.throwsExceptionWithMessage("No hay platos que puedan ser comprados", {comensalTodoTerreno.darseUnGusto()})
+	}
 }

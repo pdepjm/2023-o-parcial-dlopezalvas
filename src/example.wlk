@@ -83,11 +83,11 @@ class Parrillada inherits Plato {
 	
 	override method esEspecial() = super() && self.muchosComponentes()
 	
-	method muchosComponentes() = componentes.size() > 3
+	method muchosComponentes() = componentes.size() >= 3
 
 	override method aptoCeliacos() = componentes.all({componente => componente.aptoCeliacos()})
 
-	override method valoracion() = componentes.sum({componente => componentes.valoracion()})
+	override method valoracion() = componentes.sum({componente => componente.valoracion()})
 }
 
 object parrillaMiguelito{
@@ -104,6 +104,10 @@ object parrillaMiguelito{
 	
 	method hacerPromocion(dineroADar){
 		comensales.forEach({comensal => comensal.recibirDinero(dineroADar)})
+	}
+	
+	method agregarPlatoAlMenu(plato){
+		platos.add(plato)
 	}
 	
 }
@@ -142,6 +146,9 @@ class Comensal {
 	}
 	
 	method puedeCambiarATodoTerreno() = preferencia.puedeCambiarATodoTerreno()
+	
+	//usado para test
+	method dinero() = dinero
 }
 
 object celiaco {
