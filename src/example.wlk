@@ -6,9 +6,9 @@ class Plato {
 	
 	method esEspecial() = self.peso() > 250
 
-	method precio() = self.valoracion() * 300 + self.agregadoCeliaquia()
+	method precio() = self.valoracion() * 300 + self.montoExtraPorCeliaquia()
 
-	method agregadoCeliaquia() = if(self.aptoCeliacos()) 1200 else 0
+	method montoExtraPorCeliaquia() = if(self.aptoCeliacos()) 1200 else 0
 
 }
 
