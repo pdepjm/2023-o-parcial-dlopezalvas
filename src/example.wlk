@@ -87,7 +87,7 @@ class Parrillada inherits Plato {
 
 	override method aptoCeliacos() = componentes.all({componente => componente.aptoCeliacos()})
 
-	override method valoracion() = componentes.sum({componente => componente.valoracion()})
+	override method valoracion() = componentes.max({componente => componente.valoracion()}).valoracion()
 }
 
 object parrillaMiguelito{
