@@ -117,7 +117,7 @@ class Comensal {
 	var preferencia
 	
 	method darseUnGusto(){
-		if(self.platosQuePuedeComprar().size() == 0){
+		if(self.platosQuePuedeComprar().isEmpty()){
 			throw new DomainException(message="No hay platos que puedan ser comprados")
 		}
 		self.comprarPlato(self.platoDeMayorValoracion())
