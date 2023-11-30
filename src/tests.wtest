@@ -16,8 +16,8 @@ describe "Parrillada"{
 		assert.equals(parrilladaDeCortes.peso(), 300)
 	}
 	
-	test "La valoracion de la parrillada es la suma de las valoraciones de su componentes" {
-		assert.equals(parrilladaDeCortes.valoracion(), 300)
+	test "La valoracion de la parrillada es la valoracion maxima de las valoraciones de su componentes" {
+		assert.equals(parrilladaDeCortes.valoracion(), 100)
 	}
 	
 	test "Una parrillada es apta celiaca si sus componentes lo son" {
