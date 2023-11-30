@@ -45,21 +45,14 @@ class HamburguesaDoble inherits HamburguesaDeCarne {
 	override method esEspecial() = self.peso() > 500
 }
 
-object panIndustrial{
-	method peso() = 60
-	method aptoCeliacos() = false
+class Pan{
+	var property peso
+	var property aptoCeliacos = false
 }
 
-object panCasero{
-	method peso() = 100
-	method aptoCeliacos() = false
-}
-
-object panMaiz {
-	method peso() = 30
-	method aptoCeliacos() = true
-}
-
+const panIndustrial = new Pan(peso = 60)
+const panCasero = new Pan(peso = 100)
+const panMaiz = new Pan(peso = 30, aptoCeliacos = true)
 
 class CorteDeCarne inherits Plato{
 	
